@@ -28,6 +28,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 $routes = [
     ['GET', '#^/$#', [PageController::class, 'home']],
+    ['GET', '#^/ticket$#', function() { require __DIR__ . '/ticket.php'; exit; }],
     ['GET', '#^/movies$#', [PageController::class, 'movies']],
     ['GET', '#^/movies/([\w-]+)$#', [PageController::class, 'movie']],
     ['GET', '#^/showtimes$#', [PageController::class, 'showtimes']],

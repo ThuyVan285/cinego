@@ -134,7 +134,39 @@ function notFound(): never
 
 function artUrl(string $kind, string $id): string
 {
+    if ($kind === 'poster' || $kind === 'backdrop') {
+        if ($kind === 'backdrop') {
+            foreach (['webp', 'jpg', 'png'] as $ext) {
+                $rel = '/assets/images/backdrops/' . $id . '.' . $ext;
+                if (is_file(__DIR__ . '/../public' . $rel)) {
+                    return $rel;
+                }
+            }
+        }
+        foreach (['webp', 'jpg', 'png'] as $ext) {
+            $rel = '/assets/images/posters/' . $id . '.' . $ext;
+            if (is_file(__DIR__ . '/../public' . $rel)) {
+                return $rel;
+            }
+        }
+    }
     return '/art/' . $kind . '/' . rawurlencode($id) . '.svg';
+}
+
+function posterUrl(string|array $movieOrId): string
+{
+    if (is_array($movieOrId)) {
+        if (!empty($movieOrId['poster'])) {
+            $p = (string)$movieOrId['poster'];
+            if (is_file(__DIR__ . '/../public' . $p)) {
+                return $p;
+            }
+        }
+        $id = (string)($movieOrId['id'] ?? '');
+    } else {
+        $id = $movieOrId;
+    }
+    return artUrl('poster', $id);
 }
 
 function img(string $src, string $alt, string $class = '', string $fallbackKind = 'poster'): string

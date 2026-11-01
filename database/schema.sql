@@ -24,6 +24,7 @@ CREATE TABLE movies (
   cast_list   VARCHAR(255) NOT NULL,
   synopsis    TEXT         NOT NULL,
   palette     VARCHAR(40)  NOT NULL,
+  poster_url  VARCHAR(255) NULL,
   trailer_url VARCHAR(255) NULL,
   featured    TINYINT(1)   NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

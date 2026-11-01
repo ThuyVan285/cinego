@@ -18,7 +18,8 @@ final class Movie
             'cast' => array_map('trim', explode(',', $r['cast_list'])),
             'synopsis' => $r['synopsis'],
             'palette' => explode(',', $r['palette']),
-            'trailer' => self::validUrl($r['trailer_url']),
+            'poster' => $r['poster_url'] ?? ('/assets/images/posters/' . $r['id'] . '.webp'),
+            'trailer' => self::validUrl($r['trailer_url'] ?? null),
             'featured' => (bool)$r['featured'],
         ];
     }

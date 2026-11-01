@@ -134,4 +134,30 @@
       setTimeout(function () { pf.submit(); }, 1400);
     });
   }
+
+  // ----- Theme toggle (Sáng / Tối) -----
+  var themeBtn = $('#themeToggleBtn');
+  var applyTheme = function(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.body.classList.toggle('theme-dark', theme === 'dark');
+    document.body.classList.toggle('theme-light', theme === 'light');
+    if (themeBtn) {
+      themeBtn.textContent = theme === 'dark' ? '☀️' : '🌓';
+      themeBtn.setAttribute('title', theme === 'dark' ? 'Chuyển sang giao diện sáng' : 'Chuyển sang giao diện tối');
+    }
+  };
+  var savedTheme = localStorage.getItem('cinego_theme');
+  if (savedTheme) {
+    applyTheme(savedTheme);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme('dark');
+  }
+  if (themeBtn) {
+    themeBtn.addEventListener('click', function () {
+      var current = document.documentElement.getAttribute('data-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      var next = current === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      localStorage.setItem('cinego_theme', next);
+    });
+  }
 })();

@@ -28,10 +28,10 @@ try {
     foreach (cinemas() as $c) {
         $st->execute([$c['id'], $c['brand'], $c['name'], $c['city'], $c['area'], $c['addr'], $c['rooms']]);
     }
-    $st = $pdo->prepare('INSERT INTO movies (id, title, genres, duration, age, rating, status, release_date, director, cast_list, synopsis, palette, trailer_url, featured) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
+    $st = $pdo->prepare('INSERT INTO movies (id, title, genres, duration, age, rating, status, release_date, director, cast_list, synopsis, palette, poster_url, trailer_url, featured) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)');
     foreach (movies() as $m) {
         $st->execute([$m['id'], $m['title'], implode(', ', $m['genres']), $m['duration'], $m['age'], $m['rating'], $m['status'], $m['release'],
-            $m['director'], implode(', ', $m['cast']), $m['synopsis'], implode(',', $m['palette']), $m['trailer'], (int)$m['featured']]);
+            $m['director'], implode(', ', $m['cast']), $m['synopsis'], implode(',', $m['palette']), $m['poster'] ?? ('/assets/images/posters/' . $m['id'] . '.webp'), $m['trailer'], (int)$m['featured']]);
     }
     $st = $pdo->prepare('INSERT INTO combos (id, name, description, price, sort_order) VALUES (?,?,?,?,?)');
     foreach (combos() as $i => $c) {
