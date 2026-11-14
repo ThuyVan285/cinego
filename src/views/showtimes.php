@@ -24,5 +24,5 @@
         </div>
     </form>
     <p class="muted small result-count"><?= count($sched) ?> rạp có suất chiếu · <?= e(dateVi($date)) ?></p>
-    <div class="card pad"><?php partial('schedule', ['sched' => $sched, 'empty' => 'Không có rạp nào có suất chiếu phù hợp bộ lọc trong ngày này. Hãy đổi ngày hoặc xoá bộ lọc.']); ?></div>
+    <div class="sched-list"><?php partial('schedule', ['sched' => $sched, 'empty' => 'Không có rạp nào có suất chiếu phù hợp bộ lọc trong ngày này. Hãy đổi ngày hoặc xoá bộ lọc.']); ?></div>
 </div>

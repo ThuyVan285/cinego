@@ -129,51 +129,102 @@ final class BookingController
         $errors = [];
         $s = Booking::state();
         $c = $s['customer'] ?? [];
+        if (empty($c['name']) && ($u = User::current())) {
+            $c['name'] = $u['name'];
+            $c['email'] = $u['email'];
+            $c['phone'] = $u['phone'];
+        }
         $promoCode = (string)($s['promo'] ?? '');
         $promoMsg = null;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             checkCsrf();
-            $c = [
-                'name' => trim((string)($_POST['name'] ?? '')),
-                'email' => trim((string)($_POST['email'] ?? '')),
-                'phone' => preg_replace('/[\s.\-]/', '', (string)($_POST['phone'] ?? '')),
-            ];
-            $action = (string)($_POST['action'] ?? 'confirm');
-            $promoCode = strtoupper(trim((string)($_POST['promo'] ?? '')));
 
+            // Chuẩn hóa và làm sạch thông tin người đặt
+            $name = trim((string)($_POST['name'] ?? ''));
+            $email = strtolower(trim((string)($_POST['email'] ?? '')));
+
+            // Chuẩn hóa số điện thoại: loại bỏ dấu cách, gạch ngang, chấm, chuyển +84/84 thành 0
+            $rawPhone = trim((string)($_POST['phone'] ?? ''));
+            $cleanPhone = preg_replace('/[^\d+]/', '', $rawPhone);
+            if (str_starts_with($cleanPhone, '+84')) {
+                $cleanPhone = '0' . substr($cleanPhone, 3);
+            } elseif (str_starts_with($cleanPhone, '84') && strlen($cleanPhone) >= 11) {
+                $cleanPhone = '0' . substr($cleanPhone, 2);
+            }
+
+            $c = [
+                'name' => $name,
+                'email' => $email,
+                'phone' => $cleanPhone,
+            ];
+
+            $action = (string)($_POST['action'] ?? 'confirm');
+            $inputPromo = strtoupper(trim((string)($_POST['promo'] ?? '')));
+
+            // Nếu form gửi lên với action="promo" nhưng ô promo để trống (do người dùng gõ xong nhấn Enter)
+            // thì tự động chuyển sang hành động xác nhận đặt vé để không làm tắc nghẽn
+            if ($action === 'promo' && $inputPromo === '') {
+                $action = 'confirm';
+            }
+
+            // 1. Xử lý mã ưu đãi
             if ($action === 'remove_promo') {
                 $promoCode = '';
                 $promoMsg = ['ok', 'Đã gỡ mã ưu đãi.'];
-            } elseif ($promoCode !== '' && ($action === 'promo' || $action === 'confirm')) {
-                $p = Promotion::find($promoCode);
-                [, $perr] = Promotion::evaluate($p, $sum['ticket_total'], $sum['combo_total']);
-                if ($perr) {
-                    $errors['promo'] = $perr;
-                    $promoCode = '';
-                } elseif ($action === 'promo') {
-                    $promoMsg = ['ok', 'Đã áp dụng mã ' . $promoCode . '.'];
+            } elseif ($action === 'promo') {
+                if ($inputPromo === '') {
+                    $errors['promo'] = 'Vui lòng nhập mã ưu đãi.';
+                } else {
+                    $p = Promotion::find($inputPromo);
+                    [, $perr] = Promotion::evaluate($p, $sum['ticket_total'], $sum['combo_total']);
+                    if ($perr) {
+                        $errors['promo'] = $perr;
+                    } else {
+                        $promoCode = $inputPromo;
+                        $promoMsg = ['ok', 'Đã áp dụng mã ưu đãi ' . $promoCode . '.'];
+                    }
+                }
+            } elseif ($action === 'confirm') {
+                // Khi xác nhận: nếu có nhập mã ưu đãi mới khác mã đã áp dụng
+                if ($inputPromo !== '' && $inputPromo !== $promoCode) {
+                    $p = Promotion::find($inputPromo);
+                    [, $perr] = Promotion::evaluate($p, $sum['ticket_total'], $sum['combo_total']);
+                    if (!$perr) {
+                        $promoCode = $inputPromo;
+                    }
                 }
             }
 
+            // 2. Kiểm tra tính hợp lệ của thông tin người đặt khi bấm xác nhận
             if ($action === 'confirm') {
-                if (mb_strlen($c['name']) < 2 || !preg_match('/^[\p{L}\s\'.-]{2,80}$/u', $c['name'])) {
-                    $errors['name'] = $c['name'] === '' ? 'Vui lòng nhập họ tên.' : 'Họ tên không hợp lệ (chỉ gồm chữ cái, ít nhất 2 ký tự).';
+                // Kiểm tra họ tên: từ 2 đến 80 ký tự, hỗ trợ đầy đủ tiếng Việt có dấu (cả NFC và NFD)
+                $nameLen = mb_strlen($c['name']);
+                if ($nameLen < 2 || $nameLen > 80) {
+                    $errors['name'] = $c['name'] === '' ? 'Vui lòng nhập họ và tên.' : 'Họ và tên phải từ 2 đến 80 ký tự.';
+                } elseif (!preg_match('/^[\p{L}\p{M}\s\'.-]{2,80}$/u', $c['name'])) {
+                    $errors['name'] = 'Họ tên không hợp lệ (chỉ gồm chữ cái và khoảng trắng).';
                 }
+
+                // Kiểm tra email
                 if ($c['email'] === '') {
-                    $errors['email'] = 'Vui lòng nhập email.';
+                    $errors['email'] = 'Vui lòng nhập địa chỉ email.';
                 } elseif (!filter_var($c['email'], FILTER_VALIDATE_EMAIL)) {
-                    $errors['email'] = 'Email không hợp lệ (ví dụ: ten@example.com).';
+                    $errors['email'] = 'Địa chỉ email không đúng định dạng (ví dụ: ten@example.com).';
                 }
+
+                // Kiểm tra số điện thoại: 10 hoặc 11 chữ số bắt đầu bằng 0
                 if ($c['phone'] === '') {
                     $errors['phone'] = 'Vui lòng nhập số điện thoại.';
-                } elseif (!preg_match('/^(0|\+84)(3|5|7|8|9)\d{8}$/', $c['phone'])) {
-                    $errors['phone'] = 'Số điện thoại không hợp lệ (ví dụ: 0912345678).';
+                } elseif (!preg_match('/^0\d{9,10}$/', $c['phone'])) {
+                    $errors['phone'] = 'Số điện thoại không hợp lệ (gồm 10-11 chữ số, ví dụ: 0912345678).';
                 }
             }
+
             $s['customer'] = $c;
             $s['promo'] = $promoCode !== '' ? $promoCode : null;
             Booking::save($s);
+
             if ($action === 'confirm' && !$errors) {
                 redirect('/booking/payment');
             }

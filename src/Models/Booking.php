@@ -125,13 +125,14 @@ final class Booking
         }
 
         $pdo = Database::pdo();
+        $userId = User::id();
         for ($try = 0; $try < 5; $try++) {
             $code = 'CG-' . date('Ymd') . '-' . self::randomSuffix();
             try {
                 $pdo->beginTransaction();
-                Database::exec('INSERT INTO bookings (code, visitor_id, showtime_id, customer_name, email, phone, payment_method, promo_code,
-                    ticket_total, combo_total, discount, total, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,NOW())', [
-                    $code, $visitorId, $stId, $c['name'], $c['email'], $c['phone'], $s['pay'], $sum['promo']['code'] ?? null,
+                Database::exec('INSERT INTO bookings (code, visitor_id, user_id, showtime_id, customer_name, email, phone, payment_method, promo_code,
+                    ticket_total, combo_total, discount, total, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())', [
+                    $code, $visitorId, $userId, $stId, $c['name'], $c['email'], $c['phone'], $s['pay'], $sum['promo']['code'] ?? null,
                     $sum['ticket_total'], $sum['combo_total'], $sum['discount'], $sum['total'],
                 ]);
                 foreach ($sum['seats'] as $seat) {
@@ -172,15 +173,25 @@ final class Booking
     }
 
     // ---------- Truy vấn vé ----------
-    public static function find(string $code, string $visitorId): ?array
+    public static function find(string $code, string $visitorId, ?int $userId = null): ?array
     {
-        $b = Database::one('SELECT * FROM bookings WHERE code = ? AND visitor_id = ?', [$code, $visitorId]);
+        $userId ??= User::id();
+        if ($userId !== null) {
+            $b = Database::one('SELECT * FROM bookings WHERE code = ? AND (visitor_id = ? OR user_id = ?)', [$code, $visitorId, $userId]);
+        } else {
+            $b = Database::one('SELECT * FROM bookings WHERE code = ? AND visitor_id = ?', [$code, $visitorId]);
+        }
         return $b ? self::hydrate($b) : null;
     }
 
-    public static function forVisitor(string $visitorId): array
+    public static function forVisitor(string $visitorId, ?int $userId = null): array
     {
-        $rows = Database::all('SELECT * FROM bookings WHERE visitor_id = ? ORDER BY created_at DESC, code DESC', [$visitorId]);
+        $userId ??= User::id();
+        if ($userId !== null) {
+            $rows = Database::all('SELECT * FROM bookings WHERE visitor_id = ? OR user_id = ? ORDER BY created_at DESC, code DESC', [$visitorId, $userId]);
+        } else {
+            $rows = Database::all('SELECT * FROM bookings WHERE visitor_id = ? ORDER BY created_at DESC, code DESC', [$visitorId]);
+        }
         return array_map([self::class, 'hydrate'], $rows);
     }
 
@@ -195,8 +206,13 @@ final class Booking
     }
 
     /** Xoá lịch sử demo của người dùng và trả ghế về trạng thái trống. */
-    public static function clearAll(string $visitorId): void
+    public static function clearAll(string $visitorId, ?int $userId = null): void
     {
-        Database::exec('DELETE FROM bookings WHERE visitor_id = ?', [$visitorId]);
+        $userId ??= User::id();
+        if ($userId !== null) {
+            Database::exec('DELETE FROM bookings WHERE visitor_id = ? OR user_id = ?', [$visitorId, $userId]);
+        } else {
+            Database::exec('DELETE FROM bookings WHERE visitor_id = ?', [$visitorId]);
+        }
     }
 }

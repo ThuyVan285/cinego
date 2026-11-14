@@ -52,7 +52,21 @@
     el.title = 'Nhấn để sao chép';
     el.addEventListener('click', function () {
       if (navigator.clipboard) navigator.clipboard.writeText(el.dataset.copy);
-      var old = el.textContent; el.textContent = 'Đã chép'; setTimeout(function () { el.textContent = old; }, 1200);
+      var old = el.textContent; el.textContent = 'Đã chép ✓'; setTimeout(function () { el.textContent = old; }, 1400);
+    });
+  });
+
+  // Nút sao chép mã ưu đãi dạng button (.promo-code-btn)
+  $$('.promo-code-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.dataset.copy;
+      if (!code) return;
+      if (navigator.clipboard) navigator.clipboard.writeText(code);
+      var label = btn.querySelector('.copy-label');
+      var icon  = btn.querySelector('.icon-copy');
+      if (label) { var oldLabel = label.textContent; label.textContent = 'Đã sao chép!'; setTimeout(function () { label.textContent = oldLabel; }, 1400); }
+      btn.classList.add('copied');
+      setTimeout(function () { btn.classList.remove('copied'); }, 1400);
     });
   });
 
@@ -128,10 +142,22 @@
   if (pf) {
     var busy = false;
     pf.addEventListener('submit', function (e) {
-      if (busy) return;
-      e.preventDefault(); busy = true;
-      $('#processing').hidden = false;
-      setTimeout(function () { pf.submit(); }, 1400);
+      if (busy) {
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      busy = true;
+      var proc = $('#processing');
+      if (proc) proc.hidden = false;
+      var btn = pf.querySelector('button[type=submit]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = 'Đang xử lý...';
+      }
+      setTimeout(function () {
+        HTMLFormElement.prototype.submit.call(pf);
+      }, 1200);
     });
   }
 

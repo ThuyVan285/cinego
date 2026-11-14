@@ -19,20 +19,20 @@ $hasPromo = $sum['promo'] !== null; ?>
 
             <h2 class="mt">Mã ưu đãi</h2>
             <div class="promo-input <?= isset($errors['promo']) ? 'has-error' : '' ?>">
-                <input type="text" name="promo" value="<?= e($promoCode) ?>" placeholder="Nhập mã, ví dụ CINEGO10" aria-label="Mã ưu đãi" autocapitalize="characters">
-                <button class="btn btn-ghost" type="submit" name="action" value="promo">Áp dụng</button>
-                <?php if ($hasPromo): ?><button class="btn btn-soft" type="submit" name="action" value="remove_promo">Gỡ mã</button><?php endif; ?>
+                <input type="text" name="promo" id="promo-field" value="<?= e($promoCode) ?>" placeholder="Nhập mã, ví dụ CINEGO10" aria-label="Mã ưu đãi" autocapitalize="characters">
+                <button class="btn btn-ghost" type="submit" name="action" value="promo" formnovalidate>Áp dụng</button>
+                <?php if ($hasPromo): ?><button class="btn btn-soft" type="submit" name="action" value="remove_promo" formnovalidate>Gỡ mã</button><?php endif; ?>
             </div>
             <?= $err('promo') ?>
             <?php if ($promoMsg && !$errors): ?><p class="field-ok"><?= e($promoMsg[1]) ?></p><?php endif; ?>
-            <p class="muted small">Mã gợi ý: <?php foreach (promos() as $i => $p): ?><?= $i ? ', ' : '' ?><code><?= e($p['code']) ?></code><?php endforeach; ?></p>
+            <p class="muted small">Mã gợi ý: <?php foreach (promos() as $i => $p): ?><?= $i ? ', ' : '' ?><code style="cursor:pointer;" onclick="document.getElementById('promo-field').value=this.textContent.trim();" title="Bấm để chọn mã"><?= e($p['code']) ?></code><?php endforeach; ?></p>
         </section>
 
         <div class="side-col">
             <?php partial('summary', ['sum' => $sum]); ?>
             <div class="action-row three">
                 <a class="btn btn-ghost" href="/booking/combos">Chỉnh sửa</a>
-                <button class="btn btn-primary" type="submit" name="action" value="confirm">Xác nhận đặt vé</button>
+                <button class="btn btn-primary btn-lg" type="submit" name="action" value="confirm" id="btn-confirm-booking">Xác nhận đặt vé</button>
             </div>
         </div>
     </form>

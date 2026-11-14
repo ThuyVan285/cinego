@@ -58,14 +58,44 @@ $items = [
                 <button type="submit" aria-label="Tìm kiếm"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button>
             </form>
             <button class="theme-toggle-btn" id="themeToggleBtn" type="button" aria-label="Đổi giao diện Sáng / Tối" title="Chuyển chế độ Sáng / Tối">🌓</button>
-            <details class="account">
-                <summary class="btn btn-ghost btn-sm">Tài khoản</summary>
-                <div class="account-menu">
-                    <p>Bạn đang dùng chế độ khách – không cần đăng nhập. Vé được gắn với trình duyệt này.</p>
-                    <a href="/tickets">Vé của tôi</a>
-                    <a href="/booking">Đặt vé mới</a>
-                </div>
-            </details>
+            <?php $currentUser = User::current(); ?>
+            <?php if ($currentUser): ?>
+                <details class="account user-logged-in">
+                    <summary class="btn btn-ghost btn-sm account-btn">
+                        <span class="user-avatar-dot"><?= mb_strtoupper(mb_substr($currentUser['name'], 0, 1)) ?></span>
+                        <span class="user-name-text"><?= e($currentUser['name']) ?></span>
+                    </summary>
+                    <div class="account-menu">
+                        <div class="account-menu-user">
+                            <strong><?= e($currentUser['name']) ?></strong>
+                            <p class="muted small"><?= e($currentUser['email']) ?></p>
+                            <span class="role-chip <?= $currentUser['role'] === 'admin' ? 'admin' : 'member' ?>">
+                                <?= $currentUser['role'] === 'admin' ? '🛡️ Quản trị viên' : '🎟️ Thành viên CineGo' ?>
+                            </span>
+                        </div>
+                        <div class="menu-divider"></div>
+                        <a href="/profile">👤 Thông tin tài khoản</a>
+                        <a href="/tickets">🎟️ Vé của tôi</a>
+                        <a href="/booking">🎬 Đặt vé mới</a>
+                        <div class="menu-divider"></div>
+                        <a href="/logout" class="menu-logout-link">🚪 Đăng xuất</a>
+                    </div>
+                </details>
+            <?php else: ?>
+                <details class="account">
+                    <summary class="btn btn-ghost btn-sm">Tài khoản</summary>
+                    <div class="account-menu">
+                        <div class="account-guest-actions">
+                            <a class="btn btn-primary btn-sm" href="/login">Đăng nhập</a>
+                            <a class="btn btn-ghost btn-sm" href="/register">Đăng ký</a>
+                        </div>
+                        <div class="menu-divider"></div>
+                        <p class="muted small">Chế độ khách: Vé được lưu tạm trên trình duyệt này.</p>
+                        <a href="/tickets">🎟️ Vé của tôi</a>
+                        <a href="/booking">🎬 Đặt vé mới</a>
+                    </div>
+                </details>
+            <?php endif; ?>
         </div>
     </div>
 </header>

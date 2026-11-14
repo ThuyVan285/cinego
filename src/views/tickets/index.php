@@ -1,7 +1,16 @@
-<?php /** @var array $list */ ?>
+<?php /** @var array $list */
+$currUser = User::current();
+?>
 <div class="container">
     <div class="page-head row-between">
-        <div><h1>Vé của tôi</h1><p class="muted">Vé được lưu theo trình duyệt này (cookie) trong cơ sở dữ liệu.</p></div>
+        <div>
+            <h1>Vé của tôi</h1>
+            <?php if ($currUser): ?>
+                <p class="muted">Vé đã đặt được liên kết và đồng bộ an toàn với tài khoản <strong><?= e($currUser['name']) ?></strong>.</p>
+            <?php else: ?>
+                <p class="muted">Vé được lưu theo trình duyệt này. <a href="/login?redirect=/tickets">Đăng nhập</a> để đồng bộ vé vĩnh viễn vào tài khoản.</p>
+            <?php endif; ?>
+        </div>
         <?php if ($list): ?>
             <form method="post" action="/tickets/clear" data-confirm="Xoá toàn bộ lịch sử vé? Các ghế sẽ được trả về trạng thái trống.">
                 <?= csrfField() ?><button class="btn btn-ghost btn-sm" type="submit">Xoá lịch sử vé</button>

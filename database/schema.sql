@@ -87,9 +87,21 @@ CREATE TABLE promotions (
   color2       VARCHAR(9)   NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE users (
+  id          INT AUTO_INCREMENT PRIMARY KEY,
+  name        VARCHAR(80)  NOT NULL,
+  email       VARCHAR(120) NOT NULL UNIQUE,
+  phone       VARCHAR(15)  NOT NULL,
+  password    VARCHAR(255) NOT NULL,
+  role        ENUM('user','admin') NOT NULL DEFAULT 'user',
+  created_at  DATETIME     NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX idx_email (email)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE bookings (
   code           VARCHAR(20)  NOT NULL PRIMARY KEY,
   visitor_id     CHAR(32)     NOT NULL,
+  user_id        INT          NULL,
   showtime_id    VARCHAR(64)  NOT NULL,
   customer_name  VARCHAR(80)  NOT NULL,
   email          VARCHAR(120) NOT NULL,
@@ -102,7 +114,9 @@ CREATE TABLE bookings (
   total          INT          NOT NULL,
   created_at     DATETIME     NOT NULL,
   INDEX idx_visitor (visitor_id, created_at),
-  FOREIGN KEY (showtime_id) REFERENCES showtimes(id)
+  INDEX idx_user (user_id),
+  FOREIGN KEY (showtime_id) REFERENCES showtimes(id),
+  FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- UNIQUE (showtime_id, seat_code) ngăn đặt trùng ghế ở tầng CSDL.
