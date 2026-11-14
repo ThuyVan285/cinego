@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-// Front controller. Chạy:  php -S localhost:8000 -t public public/index.php
+// Front controller. Chạy:  php -S localhost:8000 -t public public/index.php  (hoặc Apache với .htaccess)
 $uriPath = rawurldecode(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/');
 if (PHP_SAPI === 'cli-server' && $uriPath !== '/' && is_file(__DIR__ . $uriPath)) {
-    return false; // file tĩnh / install.php
+    return false; // file tĩnh
 }
 
-require __DIR__ . '/../src/bootstrap.php';
+require __DIR__ . '/../app/bootstrap.php';
 startApp();
 visitorId();
 
@@ -19,45 +19,27 @@ try {
     }
 } catch (PDOException $e) {
     http_response_code(503);
-    render('setup', ['title' => 'Cần cài đặt CSDL', 'error' => $e->getMessage(), 'bare' => true]);
+    render('errors/setup', ['title' => 'Cần cài đặt CSDL', 'error' => $e->getMessage(), 'bare' => true]);
     exit;
 }
 
 $path = rtrim($uriPath, '/') ?: '/';
 $method = $_SERVER['REQUEST_METHOD'];
 
-$routes = [
-    ['GET', '#^/$#', [PageController::class, 'home']],
-    ['GET', '#^/ticket$#', function() { require __DIR__ . '/ticket.php'; exit; }],
-    ['GET', '#^/movies$#', [PageController::class, 'movies']],
-    ['GET', '#^/movies/([\w-]+)$#', [PageController::class, 'movie']],
-    ['GET', '#^/showtimes$#', [PageController::class, 'showtimes']],
-    ['GET', '#^/cinemas$#', [PageController::class, 'cinemas']],
-    ['GET', '#^/cinemas/([\w-]+)$#', [PageController::class, 'cinema']],
-    ['GET', '#^/promotions$#', [PageController::class, 'promotions']],
-    ['GET', '#^/art/(\w+)/([\w.-]+)\.svg$#', [Art::class, 'serve']],
-    ['GET', '#^/booking$#', [BookingController::class, 'select']],
-    ['GET', '#^/booking/start$#', [BookingController::class, 'start']],
-    ['*', '#^/booking/seats$#', [BookingController::class, 'seats']],
-    ['*', '#^/booking/combos$#', [BookingController::class, 'combos']],
-    ['*', '#^/booking/confirm$#', [BookingController::class, 'confirm']],
-    ['GET', '#^/booking/payment$#', [BookingController::class, 'payment']],
-    ['POST', '#^/booking/pay$#', [BookingController::class, 'pay']],
-    ['GET', '#^/booking/success/([\w-]+)$#', [BookingController::class, 'success']],
-    ['GET', '#^/login$#', [AuthController::class, 'showLogin']],
-    ['POST', '#^/login$#', [AuthController::class, 'login']],
-    ['GET', '#^/register$#', [AuthController::class, 'showRegister']],
-    ['POST', '#^/register$#', [AuthController::class, 'register']],
-    ['*', '#^/logout$#', [AuthController::class, 'logout']],
-    ['*', '#^/profile$#', [AuthController::class, 'profile']],
-    ['GET', '#^/tickets$#', [TicketController::class, 'index']],
-    ['GET', '#^/tickets/([\w-]+)$#', [TicketController::class, 'show']],
-    ['POST', '#^/tickets/clear$#', [TicketController::class, 'clear']],
-];
+if (str_starts_with($path, '/api/') || $path === '/api') {
+    $routes = require BASE_PATH . '/routes/api.php';
+    $path = substr($path, 4) ?: '/';
+} else {
+    $routes = require BASE_PATH . '/routes/web.php';
+}
 
-foreach ($routes as [$m, $re, $handler]) {
+foreach ($routes as $route) {
+    [$m, $re, $handler] = $route;
     if (($m === '*' || $m === $method) && preg_match($re, $path, $mt)) {
         array_shift($mt);
+        foreach ($route[3] ?? [] as $middleware) {
+            $middleware::handle();
+        }
         $handler(...$mt);
         exit;
     }

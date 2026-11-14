@@ -1,0 +1,8 @@
+/*
+ * CineGo – CSS cho màn hình nhỏ (tablet, điện thoại).
+ *
+ * Các @media hiện vẫn nằm trong style.css, ngay sau khối CSS mà chúng ghi đè.
+ * Chưa chuyển hết sang đây vì đổi thứ tự trong cascade có thể làm lệch giao diện.
+ * TODO: chuyển dần từng nhóm @media sang file này, kiểm tra lại trên mobile sau mỗi lần chuyển.
+ * Quy ước breakpoint: 1024px (tablet ngang), 768px (tablet dọc), 560px (điện thoại).
+ */

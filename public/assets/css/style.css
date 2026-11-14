@@ -1,0 +1,3397 @@
+/* ==========================================================================
+   CINEGO DESIGN SYSTEM – PHONG CÁCH "VÉ GIẤY" (PAPER TICKET)
+   Bảng màu Light / Dark mode chuẩn, Typography Google Fonts & Hiệu ứng vé giấy
+   ========================================================================== */
+
+:root {
+  /* BẢNG MÀU LIGHT MODE (MẶC ĐỊNH) */
+  --bg-page: #fbf4e8;         /* kem ấm */
+  --bg-card: #fffaf1;         /* nền thẻ/card */
+  --text-primary: #1b1f3b;    /* xanh mực đậm (chữ chính & viền nút) */
+  --text-secondary: #6b6f8a;  /* chữ phụ */
+  --border-color: #e6d9c3;    /* đường viền */
+  --accent: #ff5a36;          /* cam san hô (nút chính, link, số liệu) */
+  --accent-hover: #e54320;
+  --accent-text: #ffffff;     /* chữ trên nút nhấn */
+  --tag-bg: #ffe3d6;          /* nền nhạt cho tag / bước */
+  --navbar-bg: #1b1f3b;       /* thanh điều hướng & footer */
+  --navbar-text: #fbf4e8;     /* chữ trên navbar & footer */
+
+  /* Ánh xạ tên biến cũ sang hệ thống mới để tương thích 100% */
+  --navy: var(--navbar-bg);
+  --indigo: #2c3258;
+  --accent-dark: var(--accent-hover);
+  --accent-soft: var(--tag-bg);
+  --bg: var(--bg-page);
+  --surface: var(--bg-card);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --line: var(--border-color);
+  --ok: #15803d;
+  --err: #be123c;
+
+  /* Thông số bo góc lớn (14–24px) & Đổ bóng mềm */
+  --radius: 20px;
+  --radius-sm: 14px;
+  --radius-lg: 24px;
+  --shadow: 0 12px 28px rgba(27, 31, 59, 0.08), 0 4px 10px rgba(27, 31, 59, 0.04);
+  --shadow-lg: 0 24px 48px rgba(27, 31, 59, 0.14), 0 8px 18px rgba(27, 31, 59, 0.06);
+
+  /* Typography */
+  --font: "Be Vietnam Pro", system-ui, -apple-system, sans-serif;
+  --font-heading: "Bricolage Grotesque", system-ui, -apple-system, sans-serif;
+  --transition-smooth: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Hiệu ứng vé giấy */
+  --ticket-notch-color: var(--bg-page);
+  --ticket-dash: #d6c5ad;
+}
+
+/* BẢNG MÀU DARK MODE (Tự bật theo prefers-color-scheme hoặc toggle) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg-page: #12142a;
+    --bg-card: #1b1e3a;
+    --text-primary: #f5eddc;
+    --text-secondary: #a3a6c4;
+    --border-color: #2f335a;
+    --accent: #ff7a59;
+    --accent-hover: #ff9175;
+    --accent-text: #1b1f3b;
+    --tag-bg: #3a2a35;
+    --navbar-bg: #0c0e20;
+    --navbar-text: #f5eddc;
+
+    --navy: var(--navbar-bg);
+    --indigo: #202444;
+    --accent-dark: #ff9175;
+    --accent-soft: var(--tag-bg);
+    --bg: var(--bg-page);
+    --surface: var(--bg-card);
+    --text: var(--text-primary);
+    --muted: var(--text-secondary);
+    --line: var(--border-color);
+    --shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+    --shadow-lg: 0 28px 52px rgba(0, 0, 0, 0.52);
+    --ticket-notch-color: var(--bg-page);
+    --ticket-dash: #3d4370;
+  }
+}
+
+:root[data-theme="dark"],
+html[data-theme="dark"],
+body.theme-dark {
+  --bg-page: #12142a;
+  --bg-card: #1b1e3a;
+  --text-primary: #f5eddc;
+  --text-secondary: #a3a6c4;
+  --border-color: #2f335a;
+  --accent: #ff7a59;
+  --accent-hover: #ff9175;
+  --accent-text: #1b1f3b;
+  --tag-bg: #3a2a35;
+  --navbar-bg: #0c0e20;
+  --navbar-text: #f5eddc;
+
+  --navy: var(--navbar-bg);
+  --indigo: #202444;
+  --accent-dark: #ff9175;
+  --accent-soft: var(--tag-bg);
+  --bg: var(--bg-page);
+  --surface: var(--bg-card);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --line: var(--border-color);
+  --shadow: 0 16px 36px rgba(0, 0, 0, 0.38);
+  --shadow-lg: 0 28px 52px rgba(0, 0, 0, 0.52);
+  --ticket-notch-color: var(--bg-page);
+  --ticket-dash: #3d4370;
+}
+
+:root[data-theme="light"],
+html[data-theme="light"],
+body.theme-light {
+  --bg-page: #fbf4e8;
+  --bg-card: #fffaf1;
+  --text-primary: #1b1f3b;
+  --text-secondary: #6b6f8a;
+  --border-color: #e6d9c3;
+  --accent: #ff5a36;
+  --accent-hover: #e54320;
+  --accent-text: #ffffff;
+  --tag-bg: #ffe3d6;
+  --navbar-bg: #1b1f3b;
+  --navbar-text: #fbf4e8;
+
+  --navy: var(--navbar-bg);
+  --indigo: #2c3258;
+  --accent-dark: var(--accent-hover);
+  --accent-soft: var(--tag-bg);
+  --bg: var(--bg-page);
+  --surface: var(--bg-card);
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --line: var(--border-color);
+  --shadow: 0 12px 28px rgba(27, 31, 59, 0.08), 0 4px 10px rgba(27, 31, 59, 0.04);
+  --shadow-lg: 0 24px 48px rgba(27, 31, 59, 0.14), 0 8px 18px rgba(27, 31, 59, 0.06);
+  --ticket-notch-color: var(--bg-page);
+  --ticket-dash: #d6c5ad;
+}
+
+/* ==========================================================================
+   RESET & BASE TYPOGRAPHY
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-page);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1, h2, h3, h4, .logo, .hero h1, .detail-hero h1, .cinema-intro-copy h1, .stat-value, .ticket-num {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+  margin: 0 0 0.45em;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  font-weight: 750;
+}
+
+h1 { font-size: clamp(1.85rem, 3.5vw, 2.6rem); }
+h2 { font-size: clamp(1.35rem, 2.4vw, 1.85rem); }
+h3 { font-size: 1.15rem; }
+h4 { font-size: 1.02rem; }
+
+p { margin: 0 0 0.65em; }
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.container {
+  width: min(1200px, 100% - 32px);
+  margin-inline: auto;
+}
+
+.narrow {
+  width: min(840px, 100% - 32px);
+}
+
+.muted { color: var(--text-secondary); }
+.small { font-size: 0.88rem; }
+.center { text-align: center; }
+.grow { flex: 1; min-width: 0; }
+.mt { margin-top: 1.4rem; }
+
+code {
+  background: var(--tag-bg);
+  color: var(--accent);
+  padding: 2px 7px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-family: monospace;
+}
+
+/* ==========================================================================
+   BUTTONS (BO GÓC LỚN, VIỀN MỀM, KHÔNG SẮC CẠNH)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.94rem;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+  white-space: nowrap;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--accent-text) !important;
+  border-color: var(--accent);
+  box-shadow: 0 6px 18px rgba(255, 90, 54, 0.28);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 90, 54, 0.38);
+}
+
+.btn-ghost {
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.btn-soft {
+  background-color: var(--tag-bg);
+  color: var(--accent);
+}
+
+.btn-soft:hover {
+  background-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.btn-light {
+  background-color: rgba(255, 255, 255, 0.95);
+  color: var(--navbar-bg);
+  border: 1px solid var(--border-color);
+}
+
+.btn-light:hover {
+  background-color: #ffffff;
+  color: var(--accent);
+}
+
+.btn-sm {
+  padding: 0.44rem 0.95rem;
+  font-size: 0.84rem;
+  border-radius: 10px;
+}
+
+.btn-lg {
+  padding: 0.85rem 1.8rem;
+  font-size: 1.05rem;
+  border-radius: 16px;
+}
+
+/* ==========================================================================
+   HEADER / NAVBAR (NỀN #1b1f3b, CHỮ #fbf4e8)
+   ========================================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  min-height: 68px;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1.45rem;
+  color: var(--navbar-text) !important;
+  letter-spacing: -0.02em;
+  text-decoration: none !important;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.brand-service {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding-left: 1rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  color: #ffaa95;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-decoration: none !important;
+}
+
+.brand-service:hover {
+  color: var(--accent);
+}
+
+.nav-wrap {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1.2rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.main-nav a {
+  color: rgba(251, 244, 232, 0.85);
+  padding: 0.55rem 0.95rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.93rem;
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+.main-nav a.is-active {
+  background-color: var(--accent);
+  color: var(--accent-text) !important;
+}
+
+.header-search {
+  margin-left: auto;
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+}
+
+.header-search:focus-within {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: var(--accent);
+}
+
+.header-search input {
+  background: transparent;
+  border: 0;
+  color: var(--navbar-text);
+  padding: 0.5rem 0.95rem;
+  width: 175px;
+  font: inherit;
+}
+
+.header-search input::placeholder {
+  color: rgba(251, 244, 232, 0.6);
+}
+
+.header-search input:focus {
+  outline: none;
+}
+
+.header-search button {
+  background: transparent;
+  border: 0;
+  color: var(--navbar-text);
+  padding: 0 0.8rem;
+  cursor: pointer;
+}
+
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--navbar-text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  flex: none;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  transform: scale(1.08);
+}
+
+.account {
+  position: relative;
+}
+
+.account summary {
+  list-style: none;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--navbar-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.account summary::-webkit-details-marker {
+  display: none;
+}
+
+.account summary:hover {
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.account-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  width: 250px;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  padding: 1rem;
+  display: grid;
+  gap: 0.4rem;
+  z-index: 100;
+}
+
+.account-menu p {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.3rem;
+}
+
+.account-menu a {
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.account-menu a:hover {
+  background-color: var(--tag-bg);
+  color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2.5px;
+  background: var(--navbar-text);
+  border-radius: 2px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
+.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* ==========================================================================
+   HERO / BANNER NỔI BẬT (CINEMA INTRO & SHOWCASE)
+   ========================================================================== */
+.cinema-intro {
+  background: radial-gradient(circle at 10% 20%, rgba(255, 90, 54, 0.07) 0%, transparent 45%), var(--bg-page);
+  border-bottom: 1px dashed var(--border-color);
+  overflow: hidden;
+}
+
+.cinema-intro-grid {
+  min-height: 480px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+  gap: 3.5rem;
+  align-items: center;
+  padding-block: 3.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.cinema-intro-copy h1 {
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  margin: 0 0 1rem;
+  color: var(--text-primary);
+}
+
+.cinema-intro-lead {
+  max-width: 580px;
+  color: var(--text-secondary);
+  font-size: 1.06rem;
+  line-height: 1.65;
+  margin-bottom: 1.4rem;
+}
+
+.benefit-list {
+  list-style: none;
+  display: grid;
+  gap: 0.8rem;
+  padding: 0;
+  margin: 0 0 1.8rem;
+  color: var(--text-primary);
+}
+
+.benefit-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.benefit-list li > span {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background-color: var(--tag-bg);
+  color: var(--accent);
+  font-weight: 900;
+  font-size: 0.85rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* Thẻ showcase mang phong cách vé giấy */
+.cinema-showcase {
+  position: relative;
+  min-height: 380px;
+  border-radius: var(--radius-lg);
+  overflow: visible;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  transform: rotate(1.2deg);
+  transition: var(--transition-smooth);
+  background-color: var(--bg-card);
+}
+
+.cinema-showcase:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 28px 56px rgba(27, 31, 59, 0.18);
+}
+
+.cinema-showcase-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+}
+
+.cinema-showcase-shade {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(0deg, rgba(18, 20, 42, 0.94) 0%, rgba(18, 20, 42, 0.45) 55%, transparent 100%);
+}
+
+.cinema-showcase-content {
+  position: absolute;
+  left: 1.8rem;
+  right: 1.8rem;
+  bottom: 1.6rem;
+  color: #ffffff;
+  z-index: 2;
+}
+
+.cinema-showcase-content h2 {
+  color: #ffffff;
+  font-size: 1.85rem;
+  margin: 0.3rem 0 0.5rem;
+}
+
+.cinema-showcase-content p {
+  color: rgba(251, 244, 232, 0.88);
+  font-size: 0.95rem;
+  margin-bottom: 0.6rem;
+}
+
+.cinema-showcase-content a {
+  color: var(--accent);
+  font-weight: 750;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cinema-showcase-content a:hover {
+  text-decoration: underline;
+}
+
+.showcase-kicker {
+  color: #ffaa95;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Thẻ ưu đãi treo (Floating Paper Ticket Coupon) */
+.floating-ticket {
+  position: absolute;
+  right: -16px;
+  top: -18px;
+  width: 142px;
+  min-height: 100px;
+  padding: 0.85rem 1rem;
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.16);
+  transform: rotate(3deg);
+  z-index: 10;
+}
+
+.floating-ticket::before, .floating-ticket::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--ticket-notch-color);
+  border: 1px solid var(--border-color);
+}
+
+.floating-ticket::before { left: -9px; transform: translateY(-50%); }
+.floating-ticket::after { right: -9px; transform: translateY(-50%); }
+
+.floating-ticket span { font-size: 0.72rem; color: var(--text-secondary); text-transform: uppercase; }
+.floating-ticket strong { color: var(--accent); font-family: var(--font-heading); font-size: 1.15rem; }
+.floating-ticket small { font-size: 0.72rem; color: var(--text-secondary); font-family: monospace; }
+
+/* ==========================================================================
+   AGE / CLASSIFICATION BADGES
+   ========================================================================== */
+.age {
+  display: inline-block;
+  padding: 1px 8px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.6;
+  color: #ffffff;
+  background-color: #f59e0b;
+}
+
+.age-p { background-color: #16a34a; }
+.age-t13 { background-color: #f59e0b; }
+.age-t16 { background-color: #ea580c; }
+.age-t18 { background-color: #dc2626; }
+.age-k { background-color: #0284c7; }
+
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--tag-bg);
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin-right: 0.4rem;
+}
+
+.tag-row {
+  margin-bottom: 0.8rem;
+}
+
+/* ==========================================================================
+   SECTIONS & MOVIE GRIDS
+   ========================================================================== */
+.section {
+  padding: 2.2rem 0 1rem;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 1.8rem 0 1.1rem;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-head > a {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.section-kicker {
+  margin: 0 0 0.2rem;
+  color: var(--accent);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* Thẻ phim (Movie Card phong cách vé) */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 1.35rem;
+}
+
+.movie-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition-smooth);
+}
+
+.movie-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+
+.poster {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 3;
+  background-color: var(--tag-bg);
+  overflow: hidden;
+  border-bottom: 2px dashed var(--ticket-dash);
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.movie-card:hover .poster img {
+  transform: scale(1.05);
+}
+
+.poster .age {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 2;
+}
+
+.score {
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background-color: rgba(27, 31, 59, 0.88);
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 3px 9px;
+  border-radius: 99px;
+  font-family: var(--font-heading);
+}
+
+.ribbon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 90, 54, 0.92);
+  color: #ffffff;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 5px;
+}
+
+.movie-info {
+  padding: 0.85rem 0.9rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.movie-info h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  min-height: 2.5em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.movie-info h3 a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.movie-info h3 a:hover {
+  color: var(--accent);
+}
+
+.card-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
+}
+
+.card-actions .btn {
+  flex: 1;
+  padding-inline: 0.5rem;
+}
+
+/* ==========================================================================
+   PHIM ĐANG CHIẾU & PHIM SẮP CHIẾU (RANKED CARDS & SHOWCASE)
+   ========================================================================== */
+.cinema-now-section {
+  position: relative;
+  padding: 4.5rem 0 5rem;
+  color: #f5eddc;
+  background-color: #0c0e20;
+  overflow: hidden;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.cinema-now-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.cinema-section-title {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.2rem;
+}
+
+.cinema-section-title h2 {
+  color: #f5eddc;
+  font-size: clamp(2rem, 3vw, 2.65rem);
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.cinema-section-title > a {
+  position: absolute;
+  right: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.film-line {
+  position: absolute;
+  width: 140px;
+  height: 2px;
+  bottom: -0.75rem;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+.movie-grid-showcase {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.ranked-movie-card {
+  min-width: 0;
+  color: #f5eddc;
+  transition: var(--transition-smooth);
+}
+
+.ranked-movie-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+}
+
+.ranked-poster {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 2.95;
+  border-radius: var(--radius-sm);
+  overflow: visible;
+  color: #f5eddc;
+}
+
+.ranked-poster > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+}
+
+.poster-play {
+  position: absolute;
+  z-index: 3;
+  inset: 50% auto auto 50%;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.35);
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(2px);
+  transition: var(--transition-smooth);
+}
+
+.ranked-poster:hover .poster-play {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.movie-rank {
+  position: absolute;
+  z-index: 4;
+  left: -4px;
+  bottom: -15px;
+  color: #ffffff;
+  font-size: 3.6rem;
+  line-height: 1;
+  font-weight: 900;
+  font-family: var(--font-heading);
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+}
+
+.ranked-movie-info {
+  position: relative;
+  z-index: 2;
+  padding-top: 1.1rem;
+}
+
+.ranked-movie-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ranked-movie-info h3 a {
+  color: #f5eddc;
+}
+
+.ranked-movie-info p {
+  margin: 0 0 0.3rem;
+  color: #a3a6c4;
+  font-size: 0.86rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ranked-movie-info strong {
+  color: #f5eddc;
+  font-size: 0.92rem;
+}
+
+.ranked-movie-info strong span {
+  color: #f59e0b;
+}
+
+.ranked-movie-info strong.no-rating {
+  color: #a3a6c4;
+  font-weight: 600;
+  font-size: 0.86rem;
+}
+
+/* Nhãn tuổi ở góc trên phải poster, tránh bị số thứ hạng (góc dưới trái) đè lên */
+.ranked-poster > .age {
+  position: absolute;
+  z-index: 4;
+  top: 10px;
+  right: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.score.score-new {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.upcoming-movie-section {
+  padding: 4.5rem 0 4rem;
+  background-color: var(--bg-page);
+}
+
+.upcoming-movie-section > .container > h2 {
+  margin: 0 0 2.2rem;
+  color: var(--text-primary);
+  font-size: clamp(2rem, 3vw, 2.65rem);
+  text-align: center;
+}
+
+.upcoming-carousel {
+  position: relative;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.upcoming-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+.upcoming-movie-card {
+  min-width: 0;
+  transition: var(--transition-smooth);
+}
+
+.upcoming-movie-card:hover {
+  transform: translateY(-6px) rotate(-0.5deg);
+}
+
+.upcoming-poster {
+  position: relative;
+  display: block;
+  aspect-ratio: 2 / 2.95;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+}
+
+.upcoming-poster > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.upcoming-movie-info {
+  padding-top: 0.8rem;
+}
+
+.upcoming-movie-info h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upcoming-movie-info h3 a {
+  color: var(--text-primary);
+}
+
+.upcoming-movie-info p {
+  margin: 0 0 0.3rem;
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+}
+
+.upcoming-movie-info strong {
+  color: var(--text-primary);
+  font-size: 0.86rem;
+}
+
+.upcoming-movie-info strong span {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   BỘ LỌC PHIM & TÌM KIẾM (FILTERS)
+   ========================================================================== */
+.filter-bar, .inline-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: flex-end;
+  background-color: var(--bg-card);
+  padding: 1.2rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.4rem;
+}
+
+.inline-filter {
+  box-shadow: none;
+  padding: 0;
+  margin: 1rem 0;
+  background: transparent;
+  border: none;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 160px;
+}
+
+.field.grow {
+  min-width: 220px;
+}
+
+.field > span:first-child {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+input[type=text], input[type=email], input[type=tel], input[type=search], input[type=number], select {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font: inherit;
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 90, 54, 0.18);
+}
+
+/* Ô tìm kiếm trên thanh menu: thanh menu luôn nền tối ở cả giao diện sáng/tối,
+   nên không dùng nền/viền của ô nhập liệu chung ở trên (quy tắc đó đứng sau và cùng độ ưu tiên). */
+.header-search input[type=search] {
+  width: 175px;
+  padding: 0.5rem 0.95rem;
+  color: var(--navbar-text);
+  background-color: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.header-search input[type=search]::placeholder {
+  color: rgba(251, 244, 232, 0.65);
+  opacity: 1;
+}
+
+.header-search input[type=search]:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+@media (max-width: 960px) {
+  .header-search input[type=search] {
+    width: 100%;
+  }
+}
+
+.date-strip {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.3rem 0 0.9rem;
+  scrollbar-width: thin;
+}
+
+.date-chip {
+  flex: 0 0 auto;
+  min-width: 78px;
+  display: grid;
+  justify-items: center;
+  padding: 0.6rem 0.8rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+  font-size: 0.84rem;
+}
+
+.date-chip strong {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.date-chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.date-chip.is-active {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  box-shadow: 0 6px 16px rgba(255, 90, 54, 0.3);
+}
+
+.date-chip.is-active strong {
+  color: var(--accent-text);
+}
+
+/* ==========================================================================
+   LỊCH CHIẾU PHIM (CINEMA SCHEDULE SHELL & BROWSER)
+   ========================================================================== */
+.cinema-schedule-section {
+  padding-top: 4.5rem;
+  scroll-margin-top: 85px;
+}
+
+.cinema-schedule-title {
+  margin: 0 0 2.2rem;
+  color: var(--text-primary);
+  font-size: clamp(2rem, 3vw, 2.65rem);
+  text-align: center;
+}
+
+.cinema-schedule-shell {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.schedule-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.4rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.schedule-place {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.schedule-place > span {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+}
+
+.schedule-place > strong {
+  min-width: 160px;
+  padding: 0.55rem 0.95rem;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background-color: var(--tag-bg);
+}
+
+.nearby-btn {
+  padding: 0.55rem 1rem;
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+}
+
+.nearby-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.brand-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(82px, 1fr);
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.brand-rail-item {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  color: var(--text-secondary);
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+}
+
+.brand-logo-box {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 48px;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 900;
+  font-family: var(--font-heading);
+}
+
+.brand-rail-item:hover, .brand-rail-item.is-active {
+  color: var(--accent);
+}
+
+.brand-rail-item.is-active .brand-logo-box {
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 14px rgba(255, 90, 54, 0.25);
+  transform: translateY(-2px);
+}
+
+.schedule-browser {
+  display: grid;
+  grid-template-columns: minmax(270px, 350px) minmax(0, 1fr);
+  min-height: 600px;
+}
+
+.cinema-sidebar {
+  border-right: 1px dashed var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.cinema-list-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 18px;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+}
+
+.cinema-list-item:hover {
+  background-color: var(--tag-bg);
+}
+
+.cinema-list-item.is-active {
+  background-color: var(--tag-bg);
+  border-left: 4px solid var(--accent);
+}
+
+.schedule-movie-row {
+  display: grid;
+  grid-template-columns: 125px minmax(0, 1fr);
+  gap: 1.4rem;
+  padding: 1.3rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.schedule-movie-poster img {
+  width: 125px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+}
+
+.schedule-time {
+  display: inline-flex;
+  gap: 0.35rem;
+  padding: 0.55rem 0.95rem;
+  color: var(--accent);
+  border: 1.5px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-card);
+  font-weight: 750;
+  text-decoration: none !important;
+  transition: var(--transition-smooth);
+}
+
+.schedule-time:hover {
+  color: var(--accent-text);
+  background-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(255, 90, 54, 0.25);
+}
+
+.schedule-time.is-past {
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+  border-style: dashed;
+  background-color: rgba(230, 217, 195, 0.15);
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   CHI TIẾT PHIM (MOVIE DETAIL)
+   ========================================================================== */
+.detail-hero {
+  position: relative;
+  color: var(--text-primary);
+  background: radial-gradient(circle at 10% 20%, rgba(255, 90, 54, 0.08) 0%, transparent 50%), var(--bg-page);
+  border-bottom: 1px dashed var(--border-color);
+  overflow: hidden;
+}
+
+.detail-hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+  filter: blur(4px);
+}
+
+.detail-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 290px 1fr;
+  gap: 2.6rem;
+  padding: 3rem 0;
+  align-items: start;
+}
+
+.detail-poster img {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  transform: rotate(-1deg);
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 115px 1fr;
+  gap: 0.55rem 1rem;
+  margin: 1rem 0;
+}
+
+.kv dt {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.kv dd {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   QUY TRÌNH ĐẶT VÉ (BOOKING FLOW, SEATMAP, COMBOS, TICKET)
+   ========================================================================== */
+.steps {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem 0;
+  gap: 0.6rem;
+}
+
+.steps li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  position: relative;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+.steps li::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  left: -50%;
+  width: 100%;
+  height: 3px;
+  background-color: var(--border-color);
+  z-index: 0;
+}
+
+.steps li:first-child::before {
+  display: none;
+}
+
+.steps .num {
+  position: relative;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--bg-card);
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+  font-weight: 800;
+  font-family: var(--font-heading);
+}
+
+.steps li.is-done::before, .steps li.is-current::before {
+  background-color: var(--accent);
+}
+
+.steps li.is-done .num {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+.steps li.is-current .num {
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: 0 0 0 4px rgba(255, 90, 54, 0.2);
+}
+
+.steps li.is-current, .steps li.is-done {
+  color: var(--text-primary);
+}
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 370px;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+
+.side-col {
+  position: sticky;
+  top: 88px;
+  display: grid;
+  gap: 1rem;
+}
+
+.summary {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.4rem;
+}
+
+.summary-movie {
+  display: flex;
+  gap: 0.9rem;
+  align-items: center;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.summary-movie img {
+  width: 58px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.lines {
+  list-style: none;
+  padding: 0.8rem 0;
+  margin: 0;
+  border-top: 1px dashed var(--border-color);
+  display: grid;
+  gap: 0.45rem;
+  font-size: 0.94rem;
+}
+
+.lines li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.lines li span {
+  color: var(--text-secondary);
+}
+
+.lines li b {
+  white-space: nowrap;
+}
+
+.lines li.discount b {
+  color: #15803d;
+}
+
+/* Trên vé: dòng tiền và tổng tiền dùng cùng lưới 2 cột với phần thông tin (.kv) để thẳng hàng */
+.ticket .lines li,
+.ticket .total {
+  display: grid;
+  grid-template-columns: 115px 1fr;
+  gap: 1rem;
+  justify-content: start;
+}
+
+.ticket .lines li span {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ticket .lines li b {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.9rem;
+  border-top: 2px dashed var(--border-color);
+  font-weight: 800;
+}
+
+.total strong {
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-family: var(--font-heading);
+}
+
+/* Sơ đồ ghế (Seatmap) */
+.seat {
+  width: 34px;
+  height: 32px;
+  border-radius: 8px 8px 5px 5px;
+  border: 2px solid;
+  font: 700 0.72rem var(--font-heading);
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.seat.standard, .seat-sample.standard {
+  border-color: #6b6f8a;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+}
+
+.seat.vip, .seat-sample.vip {
+  border-color: #d97706;
+  background-color: #fffbeb;
+  color: #92400e;
+}
+
+.seat.couple, .seat-sample.couple {
+  border-color: #e11d48;
+  background-color: #fff1f2;
+  color: #be123c;
+  width: 76px;
+}
+
+.seat.is-selected, .seat-sample.is-selected {
+  background-color: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+  transform: translateY(-2px);
+}
+
+.seat.is-booked, .seat-sample.is-booked {
+  background-color: rgba(107, 111, 138, 0.25);
+  border-color: transparent;
+  color: transparent;
+  cursor: not-allowed;
+}
+
+/* Tấm vé thành công (Paper Ticket Success) */
+.ticket {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 230px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.ticket-main {
+  padding: 1.8rem;
+}
+
+.ticket-stub {
+  background-color: var(--tag-bg);
+  color: var(--text-primary);
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 0.8rem;
+  padding: 1.4rem;
+  border-left: 2px dashed var(--border-color);
+  text-align: center;
+  position: relative;
+}
+
+/* ==========================================================================
+   FOOTER (NỀN #1b1f3b, CHỮ #fbf4e8)
+   ========================================================================== */
+.site-footer {
+  background-color: var(--navbar-bg);
+  color: var(--navbar-text);
+  margin-top: 4rem;
+  padding: 3.8rem 0 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 2.2rem;
+}
+
+.site-footer .logo {
+  color: #ffffff !important;
+}
+
+.footer-grid h4 {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  margin-bottom: 0.8rem;
+}
+
+.footer-grid a, .footer-grid span {
+  display: block;
+  color: rgba(251, 244, 232, 0.78);
+  margin-bottom: 0.45rem;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: color 0.18s;
+}
+
+.footer-grid a:hover {
+  color: var(--accent);
+}
+
+.footer-grid p {
+  color: rgba(251, 244, 232, 0.7);
+  font-size: 0.92rem;
+  line-height: 1.65;
+  margin-top: 0.8rem;
+}
+
+.footer-note {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 2rem;
+  padding: 1.4rem 0;
+  font-size: 0.85rem;
+  color: rgba(251, 244, 232, 0.55);
+}
+
+.footer-note .copy {
+  margin-top: 0.6rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN CHO THIẾT BỊ DI ĐỘNG
+   ========================================================================== */
+@media (max-width: 960px) {
+  .cinema-intro-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: 2.5rem 3.5rem;
+  }
+  .cinema-showcase {
+    min-height: 340px;
+  }
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+  .side-col {
+    position: static;
+  }
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .detail-poster {
+    max-width: 220px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .nav-toggle {
+    display: flex;
+  }
+  .nav-wrap {
+    display: none;
+    position: absolute;
+    top: 68px;
+    left: 0;
+    right: 0;
+    background-color: var(--navbar-bg);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.2rem 18px 1.5rem;
+    gap: 1rem;
+    box-shadow: 0 16px 28px rgba(0, 0, 0, 0.35);
+  }
+  .nav-open .nav-wrap {
+    display: flex;
+  }
+  .main-nav {
+    flex-direction: column;
+  }
+  .header-search {
+    margin-left: 0;
+    width: 100%;
+  }
+  .header-search input {
+    width: 100%;
+  }
+  .schedule-browser {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .cinema-sidebar {
+    border-right: 0;
+    border-bottom: 1px dashed var(--border-color);
+  }
+}
+
+@media (max-width: 680px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+  .movie-grid-showcase, .upcoming-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding-bottom: 0.8rem;
+    scrollbar-width: none;
+  }
+  .ranked-movie-card, .upcoming-movie-card {
+    flex: 0 0 180px;
+  }
+  .ticket {
+    grid-template-columns: 1fr;
+  }
+  .ticket-stub {
+    border-left: 0;
+    border-top: 2px dashed var(--border-color);
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .floating-ticket {
+    right: 0;
+    top: -12px;
+    transform: scale(0.9) rotate(2deg);
+  }
+  .schedule-movie-row {
+    grid-template-columns: 85px minmax(0, 1fr);
+    gap: 0.9rem;
+    padding: 0.9rem;
+  }
+  .schedule-movie-poster img {
+    width: 85px;
+  }
+}
+
+/* ==========================================================================
+   TRANG LỊCH CHIẾU – CARD RẠP & NÚT GIỜ CHIẾU (REDESIGN)
+   ========================================================================== */
+
+/* Danh sách tất cả rạp */
+.sched-list {
+  display: grid;
+  gap: 1.4rem;
+}
+
+/* Card mỗi rạp */
+.sched-cinema-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+/* Header rạp */
+.sched-cinema-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px dashed var(--border-color);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 90, 54, 0.04) 0%,
+    transparent 60%
+  );
+}
+
+.sched-brand-dot {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(255, 122, 89, 0.2);
+}
+
+.sched-cinema-info {
+  min-width: 0;
+}
+
+.sched-cinema-name {
+  margin: 0 0 0.15rem;
+  font-size: 1.1rem;
+  font-family: var(--font-heading);
+  font-weight: 750;
+}
+
+.sched-cinema-name a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.sched-cinema-name a:hover {
+  color: var(--accent);
+}
+
+.sched-cinema-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+}
+
+.sched-cinema-address svg {
+  flex: none;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Danh sách phim trong rạp */
+.sched-movie-list {
+  padding: 0.6rem 0;
+}
+
+/* Hàng phim (poster + nội dung) */
+.sched-movie-row {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+  padding: 0.9rem 1.4rem;
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.18s;
+}
+
+.sched-movie-row:last-child {
+  border-bottom: none;
+}
+
+.sched-movie-row:hover {
+  background-color: rgba(255, 90, 54, 0.025);
+}
+
+/* Thumbnail poster phim */
+.sched-movie-poster-link {
+  display: block;
+  flex: none;
+}
+
+.sched-movie-thumb {
+  width: 80px;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease;
+}
+
+.sched-movie-row:hover .sched-movie-thumb {
+  transform: scale(1.04) rotate(-0.5deg);
+}
+
+/* Nội dung phim (tên, badge, nút giờ) */
+.sched-movie-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 0.1rem;
+}
+
+.sched-movie-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sched-movie-title {
+  font-family: var(--font-heading);
+  font-weight: 750;
+  font-size: 1.04rem;
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.18s;
+}
+
+.sched-movie-title:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.sched-movie-badges {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.sched-duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.sched-duration svg {
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+/* Lưới các nút giờ chiếu */
+.sched-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Nút giờ chiếu */
+.sched-time-btn {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  padding: 0.42rem 0.7rem;
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  background-color: var(--bg-card);
+  color: var(--accent);
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  line-height: 1.25;
+}
+
+.sched-time-btn:not(.is-past):hover {
+  background-color: var(--accent);
+  color: var(--accent-text);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 90, 54, 0.3);
+}
+
+.sched-time-btn.is-past {
+  border-color: var(--border-color);
+  border-style: dashed;
+  color: var(--text-secondary);
+  background-color: transparent;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.sched-time-hour {
+  font-family: var(--font-heading);
+  font-weight: 750;
+  font-size: 0.96rem;
+  letter-spacing: 0.01em;
+}
+
+.sched-time-room {
+  font-size: 0.7rem;
+  font-weight: 700;
+  opacity: 0.75;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Responsive mobile */
+@media (max-width: 680px) {
+  .sched-cinema-header {
+    padding: 0.9rem 1rem;
+  }
+
+  .sched-movie-row {
+    grid-template-columns: 64px minmax(0, 1fr);
+    gap: 0.8rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .sched-movie-thumb {
+    width: 64px;
+  }
+
+  .sched-movie-title {
+    font-size: 0.95rem;
+    white-space: normal;
+  }
+
+  .sched-time-btn {
+    min-width: 64px;
+    padding: 0.38rem 0.55rem;
+  }
+
+  .sched-time-hour {
+    font-size: 0.88rem;
+  }
+}
+
+
+/* ==========================================================================
+   TRANG ƯU ĐÃI – THIẾT KẾ DẠNG VÉ NGANG (PROMO TICKET)
+   ========================================================================== */
+
+/* Danh sách dọc */
+.promo-list {
+  display: grid;
+  gap: 1.1rem;
+  margin-bottom: 2.5rem;
+}
+
+/* Thẻ vé ngang */
+.promo-ticket {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr);
+  position: relative;
+  background-color: #fffaf1;
+  border: 1px solid #e6d9c3;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(27, 31, 59, 0.07);
+  overflow: hidden;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .promo-ticket {
+    background-color: #1e2040;
+    border-color: #2f335a;
+  }
+}
+:root[data-theme="dark"] .promo-ticket,
+body.theme-dark .promo-ticket {
+  background-color: #1e2040;
+  border-color: #2f335a;
+}
+
+.promo-ticket:hover {
+  box-shadow: 0 8px 28px rgba(27, 31, 59, 0.13);
+  transform: translateY(-2px);
+}
+
+.promo-ticket.is-expired {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+/* Cột trái – badge gradient */
+.promo-ticket-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: linear-gradient(160deg, var(--c1, #ff5a36), var(--c2, #ff9175));
+  padding: 1.1rem 0.75rem;
+  border-right: 2px dashed rgba(255,255,255,0.35);
+  position: relative;
+}
+
+.promo-badge {
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1.5rem;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  text-align: center;
+}
+
+.promo-sub {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(255,255,255,0.18);
+  padding: 2px 7px;
+  border-radius: 99px;
+}
+
+/* Notch (lỗ tròn giả vé) */
+.promo-notch {
+  position: absolute;
+  left: 102px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--bg-page);
+  border: 1px solid var(--border-color);
+  z-index: 2;
+}
+
+.promo-notch-top { top: -8px; }
+.promo-notch-bot { bottom: -8px; }
+
+/* Cột phải – nội dung */
+.promo-ticket-right {
+  padding: 1.1rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.promo-ticket-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+
+.promo-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-family: var(--font-heading);
+  font-weight: 750;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.promo-expired-badge {
+  flex: none;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #dc2626;
+  background: #fee2e2;
+  padding: 2px 8px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.promo-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.promo-cond {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.promo-cond svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Footer thẻ */
+.promo-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.3rem;
+  padding-top: 0.65rem;
+  border-top: 1px dashed var(--border-color);
+}
+
+.promo-footer-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.promo-expires {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.promo-expires svg {
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Nút sao chép mã */
+.promo-code-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--tag-bg);
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  font: inherit;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 0.82rem;
+  transition: all 0.18s ease;
+}
+
+.promo-code-btn code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-family: monospace;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+}
+
+.promo-code-btn:hover {
+  background: var(--accent);
+  color: var(--accent-text);
+  border-color: var(--accent);
+}
+
+.promo-code-btn.copied {
+  background: #15803d;
+  color: #fff;
+  border-color: #15803d;
+}
+
+.copy-label {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+.promo-cta {
+  flex: none;
+}
+
+/* Hướng dẫn sử dụng mã */
+.promo-howto-section {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 2rem 1.8rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.promo-howto-section h2 {
+  margin: 0 0 1.2rem;
+  font-size: 1.2rem;
+}
+
+.promo-howto {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.promo-howto li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.howto-num {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--accent-text);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.85rem;
+}
+
+.promo-howto li div {
+  padding-top: 0.1rem;
+}
+
+.promo-howto li b {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-family: var(--font-heading);
+}
+
+.promo-howto li p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive promo */
+@media (max-width: 540px) {
+  .promo-ticket {
+    grid-template-columns: 90px minmax(0, 1fr);
+  }
+
+  .promo-badge {
+    font-size: 1.2rem;
+  }
+
+  .promo-notch {
+    left: 82px;
+  }
+
+  .promo-ticket-right {
+    padding: 0.85rem 1rem;
+  }
+
+  .promo-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   TRANG RẠP CHIẾU – DANH SÁCH THEO THƯƠNG HIỆU (CINEMAS REDESIGN)
+   ========================================================================== */
+
+/* Bộ lọc thu gọn */
+.cinema-filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  align-items: flex-end;
+  background-color: var(--bg-card);
+  padding: 1rem 1.2rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.8rem;
+}
+
+/* Danh sách hệ thống rạp */
+.cinemas-brand-list {
+  display: grid;
+  gap: 2rem;
+}
+
+/* Section từng hệ thống */
+.cinemas-brand-section {
+  /* no extra bg */
+}
+
+/* Header hệ thống */
+.cinemas-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.7rem;
+  border-bottom: 2px dashed var(--border-color);
+}
+
+.cinemas-brand-dot {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.cinemas-brand-name {
+  margin: 0;
+  font-size: 1.15rem;
+  font-family: var(--font-heading);
+  font-weight: 750;
+}
+
+.cinemas-brand-count {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  background: var(--tag-bg);
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+
+/* Lưới chi nhánh */
+.cinemas-branch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+/* Card chi nhánh */
+.cinemas-branch-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.cinemas-branch-card:hover {
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.cinemas-branch-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.cinemas-branch-icon {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1.5px solid;
+  display: grid;
+  place-items: center;
+}
+
+.cinemas-branch-info {
+  min-width: 0;
+}
+
+.cinemas-branch-name {
+  margin: 0 0 0.2rem;
+  font-size: 1rem;
+  font-family: var(--font-heading);
+  font-weight: 750;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cinemas-branch-name a {
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.cinemas-branch-name a:hover {
+  color: var(--accent);
+}
+
+.cinemas-branch-address {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.28rem;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.cinemas-branch-address svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+/* Chips meta */
+.cinemas-branch-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.cinemas-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  background: var(--tag-bg);
+  padding: 3px 10px;
+  border-radius: 99px;
+}
+
+.cinemas-meta-chip svg {
+  opacity: 0.7;
+}
+
+.cinemas-meta-movies {
+  color: var(--accent);
+}
+
+.cinemas-meta-empty {
+  opacity: 0.65;
+}
+
+/* Danh sách phim đang chiếu */
+.cinemas-branch-movies {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cinemas-branch-movies a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.cinemas-branch-movies a:hover {
+  color: var(--accent);
+}
+
+/* CTA nút */
+.cinemas-branch-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  width: fit-content;
+}
+
+/* Chi tiết rạp – hero thu gọn */
+.cinema-detail-hero {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem 1.6rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.cinema-detail-icon {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 14px;
+  border: 1.5px solid;
+  display: grid;
+  place-items: center;
+}
+
+.cinema-detail-info {
+  min-width: 0;
+}
+
+.cinema-detail-info h1 {
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  margin: 0.2rem 0 0.25rem;
+}
+
+.cinema-detail-address {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.cinema-detail-address svg {
+  flex: none;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.cinema-detail-rooms {
+  color: var(--text-secondary);
+}
+
+/* Responsive cinemas */
+@media (max-width: 640px) {
+  .cinemas-branch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cinema-detail-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    padding: 1rem 1.1rem;
+  }
+}
+
+
+/* ==========================================================================
+   AUTHENTICATION & PROFILE (ĐĂNG NHẬP, ĐĂNG KÝ, TÀI KHOẢN)
+   ========================================================================== */
+
+/* Khối bao bọc trang auth */
+.auth-wrapper {
+  max-width: 500px;
+  margin: 3rem auto;
+}
+
+.auth-card {
+  padding: 2.5rem 2.2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+.auth-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background-color: var(--tag-bg);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  margin: 0 auto 1.1rem;
+  border: 1.5px solid var(--border-color);
+}
+
+.auth-header h1 {
+  font-size: 1.85rem;
+  margin: 0 0 0.45rem;
+}
+
+.auth-header p {
+  color: var(--text-secondary);
+  font-size: 0.94rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Thông báo lỗi chung */
+.auth-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.3rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.auth-alert.error {
+  background-color: rgba(220, 38, 38, 0.12);
+  color: #ef4444;
+  border: 1.5px solid rgba(220, 38, 38, 0.28);
+}
+
+.auth-form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem;
+}
+
+.auth-actions {
+  margin-top: 0.6rem;
+  display: flex;
+}
+
+/* Khối tài khoản demo tiện lợi */
+.auth-demo-box {
+  margin-top: 1.6rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 90, 54, 0.05);
+  border: 1px dashed var(--border-color);
+}
+
+.auth-demo-box p {
+  margin-bottom: 0.5rem;
+}
+
+.demo-account-list {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.demo-fill-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: all 0.18s ease;
+  text-align: left;
+}
+
+.demo-fill-btn:hover {
+  border-color: var(--accent);
+  background-color: var(--tag-bg);
+  transform: translateY(-1px);
+}
+
+.demo-fill-btn code {
+  font-size: 0.78rem;
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px dashed var(--border-color);
+  font-size: 0.92rem;
+}
+
+.auth-footer p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.auth-footer a {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Tích hợp Nút & Menu Tài khoản trên Header */
+.account-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding-inline: 0.85rem !important;
+}
+
+.user-avatar-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  line-height: 1;
+}
+
+.user-name-text {
+  max-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+}
+
+.account-menu-user {
+  padding-bottom: 0.4rem;
+}
+
+.account-menu-user strong {
+  display: block;
+  font-size: 0.96rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.role-chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 750;
+  margin-top: 0.35rem;
+}
+
+.role-chip.admin {
+  background-color: rgba(220, 38, 38, 0.18);
+  color: #ef4444;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+}
+
+.role-chip.member {
+  background-color: var(--tag-bg);
+  color: var(--accent);
+}
+
+.menu-divider {
+  height: 1px;
+  border-top: 1px dashed var(--border-color);
+  margin: 0.55rem 0;
+}
+
+.account-guest-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.account-guest-actions .btn {
+  padding-inline: 0.6rem;
+  font-size: 0.84rem;
+}
+
+.menu-logout-link {
+  color: #ef4444 !important;
+}
+
+.menu-logout-link:hover {
+  background-color: rgba(220, 38, 38, 0.12) !important;
+}
+
+/* ==========================================================================
+   TRANG THÔNG TIN TÀI KHOẢN (PROFILE)
+   ========================================================================== */
+.profile-layout {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-bottom: 3rem;
+}
+
+.profile-user-card {
+  padding: 2.2rem 1.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.profile-avatar {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  font-size: 2.1rem;
+  font-weight: 850;
+  font-family: var(--font-heading);
+  margin-bottom: 0.9rem;
+  box-shadow: 0 8px 24px rgba(255, 90, 54, 0.35);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-name {
+  font-size: 1.35rem;
+  margin: 0 0 0.35rem;
+  color: var(--text-primary);
+}
+
+.profile-role {
+  margin-bottom: 1rem;
+}
+
+.role-badge {
+  display: inline-block;
+  padding: 3px 12px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 750;
+}
+
+.role-badge.admin {
+  background-color: rgba(220, 38, 38, 0.16);
+  color: #ef4444;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.role-badge.member {
+  background-color: var(--tag-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.profile-meta-list {
+  display: grid;
+  gap: 0.65rem;
+  width: 100%;
+  text-align: left;
+  margin: 1rem 0 1.4rem;
+  padding: 1rem 0;
+  border-top: 1px dashed var(--border-color);
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meta-item svg {
+  color: var(--accent);
+  flex: none;
+}
+
+.profile-stats {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.4rem;
+}
+
+.stat-box {
+  background-color: var(--tag-bg);
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--radius-sm);
+  display: grid;
+  justify-items: center;
+  gap: 0.15rem;
+}
+
+.stat-box strong {
+  font-size: 1.6rem;
+  color: var(--accent);
+  font-family: var(--font-heading);
+  line-height: 1.1;
+}
+
+.stat-box span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.profile-nav-actions {
+  display: grid;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.profile-section h2 {
+  margin: 0 0 1.2rem;
+  font-size: 1.25rem;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 0.75rem;
+}
+
+.profile-form {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.form-btn-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+
+/* Responsive cho Auth & Profile */
+@media (max-width: 820px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .field-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* Modal xử lý thanh toán mô phỏng */
+.processing {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background-color: rgba(18, 20, 42, 0.75);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.processing[hidden] {
+  display: none !important;
+}
+
+.processing-box {
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 2.2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  text-align: center;
+  animation: popIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.processing-box strong {
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  font-family: var(--font-heading);
+}
+
+.processing-box small {
+  color: var(--text-secondary);
+}
+
+.spinner {
+  width: 44px;
+  height: 44px;
+  border: 3.5px solid var(--tag-bg);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes popIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================================================
+   BỔ SUNG: giữ ghế, trạng thái vé, thanh toán, QR, bản đồ rạp, trailer, ảnh đại diện
+   ========================================================================== */
+/* Ghế đang được người khác giữ (sọc chéo) */
+.seat.is-held, .seat-sample.is-held {
+  background-image: repeating-linear-gradient(45deg, rgba(217, 119, 6, 0.35) 0 4px, transparent 4px 8px);
+  background-color: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.55);
+  color: transparent;
+  cursor: not-allowed;
+}
+/* Ghế tạm ngưng (tắt trong trang quản trị) */
+.seat.is-blocked, .seat-sample.is-blocked {
+  background: repeating-linear-gradient(-45deg, rgba(107, 111, 138, 0.25) 0 3px, transparent 3px 6px);
+  border-color: rgba(107, 111, 138, 0.35);
+  border-style: dashed;
+  color: transparent;
+  cursor: not-allowed;
+}
+.seat-sample { display: inline-block; width: 18px; height: 16px; border-radius: 5px 5px 3px 3px; border: 2px solid; vertical-align: middle; margin-right: 6px; }
+.seat-sample.couple { width: 30px; }
+
+/* Đồng hồ giữ ghế / hạn thanh toán */
+.hold-timer {
+  margin: 0.9rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  background: rgba(255, 90, 54, 0.08);
+  border: 1px dashed var(--accent);
+  font-size: 0.9rem;
+}
+.hold-timer b { font-variant-numeric: tabular-nums; font-size: 1.05rem; color: var(--accent); }
+.hold-timer.is-urgent { background: rgba(225, 29, 72, 0.12); }
+.hold-timer.is-expired { border-style: solid; color: var(--text-secondary); }
+
+/* Nhãn trạng thái vé */
+.status {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: rgba(107, 111, 138, 0.15);
+  color: var(--text-secondary);
+}
+.status.is-up { background: rgba(22, 163, 74, 0.14); color: #15803d; }
+.status.is-pending { background: rgba(217, 119, 6, 0.16); color: #b45309; }
+.status.is-cancelled { background: rgba(225, 29, 72, 0.12); color: #be123c; }
+.eyebrow .status { margin-left: 0.4rem; text-transform: none; letter-spacing: 0; }
+
+/* Vé: thông tin giao dịch, vé hết hiệu lực, QR */
+.ticket-sub { margin: 1.2rem 0 0.4rem; font-size: 1rem; }
+.ticket.is-void .ticket-main { opacity: 0.72; }
+.ticket-stub .qr { width: 170px; height: 170px; border-radius: 8px; background: #fff; }
+.pay-status { font-weight: 700; }
+.pay-success { color: #15803d; }
+.pay-pending, .pay-unpaid, .pay-refund_pending { color: #b45309; }
+.pay-failed { color: #be123c; }
+.pay-refunded { color: var(--text-secondary); }
+
+/* Lựa chọn phương thức thanh toán */
+.pay-options { display: grid; gap: 0.7rem; margin: 1rem 0; }
+.pay-option {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.pay-option:has(input:checked) { border-color: var(--accent); background: rgba(255, 90, 54, 0.06); }
+.pay-option input { margin-top: 0.25rem; accent-color: var(--accent); }
+.pay-option.is-disabled { opacity: 0.55; cursor: not-allowed; }
+.pay-body { display: grid; gap: 0.2rem; }
+.pay-body small { color: var(--text-secondary); }
+.pay-body .pay-off { color: #b45309; }
+.notice { padding: 0.7rem 0.9rem; border-radius: 10px; font-size: 0.9rem; }
+.notice-info { background: rgba(79, 70, 229, 0.08); border: 1px solid rgba(79, 70, 229, 0.25); }
+.btn-danger { color: #be123c; border-color: rgba(225, 29, 72, 0.4); }
+.action-row form { display: contents; }
+
+/* Cổng thanh toán thử nghiệm */
+.gateway { min-height: 100vh; display: grid; place-items: center; padding: 24px 16px; background: linear-gradient(135deg, #12142a, #2a1f4a); }
+.gateway-card { width: 100%; max-width: 460px; background: var(--bg-card); color: var(--text-primary); border-radius: 18px; padding: 1.6rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35); }
+.gateway-head { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.gateway-logo { font: 800 1.4rem var(--font-heading); }
+.gateway-logo b { color: var(--accent); }
+.gateway-badge { font-size: 0.7rem; font-weight: 800; padding: 0.25rem 0.55rem; border-radius: 6px; background: #fef3c7; color: #92400e; }
+.gateway-note { font-size: 0.85rem; color: var(--text-secondary); }
+.gateway-kv { display: grid; grid-template-columns: auto 1fr; gap: 0.35rem 0.9rem; font-size: 0.92rem; }
+.gateway-kv dt { color: var(--text-secondary); }
+.gateway-kv dd { margin: 0; word-break: break-word; }
+.gateway-amount { display: flex; justify-content: space-between; align-items: baseline; margin: 1rem 0; padding-top: 1rem; border-top: 2px dashed var(--border-color); }
+.gateway-amount strong { font: 800 1.7rem var(--font-heading); color: var(--accent); }
+.gateway-actions { display: grid; gap: 0.6rem; margin-top: 1rem; }
+
+/* Bản đồ & phòng chiếu của rạp */
+.cinema-location { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 1.2rem; margin: 1.5rem 0; }
+.cinema-map { border-radius: 14px; overflow: hidden; border: 1px solid var(--border-color); min-height: 280px; }
+.cinema-map iframe { width: 100%; height: 100%; min-height: 280px; border: 0; display: block; }
+.cinema-location-info h2 { margin-top: 0; }
+.room-list { list-style: none; padding: 0; margin: 1rem 0 0; display: grid; gap: 0.4rem; }
+.room-list li { padding: 0.45rem 0.7rem; border: 1px solid var(--border-color); border-radius: 8px; }
+.map-link { color: var(--accent); font-weight: 600; }
+
+/* Trailer */
+.trailer-dialog { width: min(960px, 94vw); padding: 0; border: 0; border-radius: 14px; background: #000; overflow: visible; }
+.trailer-dialog::backdrop { background: rgba(0, 0, 0, 0.8); }
+.trailer-frame { aspect-ratio: 16 / 9; }
+.trailer-frame iframe { width: 100%; height: 100%; border: 0; border-radius: 14px; }
+.trailer-close { position: absolute; top: -44px; right: 0; }
+.trailer-close button { width: 36px; height: 36px; border-radius: 50%; border: 0; font-size: 1.4rem; cursor: pointer; background: #fff; }
+
+/* Ảnh đại diện */
+.profile-avatar { overflow: hidden; }
+.profile-avatar img, .user-avatar-dot img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block; }
+.user-avatar-dot { overflow: hidden; }
+.avatar-form { display: grid; justify-items: center; gap: 0.35rem; margin-bottom: 0.8rem; }
+.link-btn { background: none; border: 0; padding: 0; color: var(--text-secondary); text-decoration: underline; cursor: pointer; }
+
+@media (max-width: 768px) {
+  .cinema-location { grid-template-columns: 1fr; }
+  .ticket-stub .qr { width: 150px; height: 150px; }
+}

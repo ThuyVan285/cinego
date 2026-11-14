@@ -1,0 +1,9 @@
+/vendor/
+.env
+/storage/logs/*
+/storage/sessions/*
+/storage/cache/*
+/storage/qrcodes/*
+/public/uploads/movies/*
+/public/uploads/users/*
+!.gitkeep
